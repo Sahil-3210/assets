@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mdex</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #667eea;
+      --border: #e5e7eb;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    /* demo visuals kept simple */
+    .assignment-card {
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 16px
+    }
+
+    .id-card {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      width: fit-content;
+      margin: 0 auto
+    }
+
+    .id-header {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .id-content {
+      display: flex;
+      gap: 12px
+    }
+
+    .student-photo {
+      width: 75px;
+      height: 90px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 40px
+    }
+
+    .profile-card {
+      text-align: center
+    }
+
+    .profile-pic {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 16px
+    }
+
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 12px
+    }
+
+    .food-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .food-image {
+      height: 120px;
+      background: #ffe6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px
+    }
+
+    .food-info {
+      padding: 12px
+    }
+
+    .weather-card {
+      background: linear-gradient(135deg, #74b9ff, #0984e3);
+      color: #fff;
+      border-radius: 16px;
+      text-align: center;
+      padding: 22px
+    }
+
+    .product-card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden
+    }
+
+    .product-image {
+      height: 140px;
+      background: #eef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px
+    }
+
+    .product-info {
+      padding: 12px
+    }
+
+    .news-card {
+      display: flex;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px
+    }
+
+    .news-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      background: #fee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px
+    }
+
+    .social-post {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px
+    }
+
+    .post-header {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    .user-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px
+    }
+
+    .post-image {
+      height: 120px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0
+    }
+
+    .album-card {
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px
+    }
+
+    .album-cover {
+      width: 150px;
+      height: 150px;
+      background: #eef;
+      border-radius: 10px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px
+    }
+
+    .contact-card {
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px
+    }
+
+    .contact-photo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #eee;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px
+    }
+
+    .contact-info {
+      max-width: 280px;
+      margin: 0 auto;
+      text-align: left
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0;
+      color: var(--muted)
+    }
+
+    .about-card {
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px
+    }
+
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: #eef;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px
+    }
+
+    /* copy button */
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px
+    }
+
+    .copy-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: transform .05s ease;
+    }
+
+    .copy-btn:active {
+      transform: scale(.98)
+    }
+
+    .copy-btn.copied {
+      border-color: transparent;
+      background: rgba(22, 163, 74, .1);
+      color: var(--success);
+    }
+
+    /* hide code holders */
+    script[type="text/plain"] {
+      display: none
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid">
+
+    <!-- A1 -->
+    <div class="card">
+      <div class="title">Assignment 1: Student ID Card</div>
+      <div class="assignment-card">
+        <div class="id-card">
+          <div class="id-header"><span>🎓</span><strong>Tech University</strong></div>
+          <div class="id-content">
+            <div class="student-photo">👤</div>
+            <div>
+              <div style="font-weight:700">John Smith</div>
+              <div style="font-size:12px;opacity:.9">ID: 2024CS001</div>
+              <div style="margin:6px 0; font-size:14px">Computer Science</div>
+              <div style="font-size:12px; opacity:.9">Batch: 2024-2028</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a1', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a1">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [Color(0xFF1e3c72), Color(0xFF2a5298)]),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            padding: EdgeInsets.all(20),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('🎓 Tech University', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+              SizedBox(height: 15),
+              Row(children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    'https://as1.ftcdn.net/v2/jpg/02/21/09/40/1000_F_221094033_LkLRc4NBltZ4XgTiTtZthvv0JrJM4cvG.jpg',
+                    width: 70, height: 85, fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 15),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('John Smith', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 5),
+                  Text('ID: 2024CS001', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  SizedBox(height: 8),
+                  Text('Computer Science', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                  Text('Batch: 2024-2028', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ]),
+              ]),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A2 -->
+    <div class="card">
+      <div class="title">Assignment 2: Personal Profile</div>
+      <div class="assignment-card">
+        <div class="profile-card">
+          <div class="profile-pic">👩</div>
+          <div style="font-weight:700; font-size:20px">Sarah Johnson</div>
+          <div style="color:var(--muted); margin:8px 0 12px">Flutter developer passionate about creating beautiful mobile experiences</div>
+          <div class="profile-stats">
+            <div>
+              <div style="font-weight:700">1.2K</div>
+              <div style="font-size:12px;color:var(--muted)">Followers</div>
+            </div>
+            <div>
+              <div style="font-weight:700">856</div>
+              <div style="font-size:12px;color:var(--muted)">Following</div>
+            </div>
+            <div>
+              <div style="font-weight:700">42</div>
+              <div style="font-size:12px;color:var(--muted)">Posts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a2', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a2">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(children: [
+              ClipOval(
+                child: Image.network(
+                  'https://as2.ftcdn.net/v2/jpg/04/95/15/79/1000_F_495157971_zIhzjfx3yG1AsgYOTQS9Z6VHAsN0OJSI.jpg',
+                  width: 90, height: 90, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 15),
+              Text('Sarah Johnson', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
+              Text(
+                'Flutter developer passionate about creating beautiful mobile experiences',
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 15),
+              Divider(),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                _stat('1.2K', 'Followers'),
+                _stat('856', 'Following'),
+                _stat('42', 'Posts'),
+              ]),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _stat(String value, String label) => Column(children: [
+        Text(value, style: TextStyle(fontWeight: FontWeight.bold)),
+        Text(label, style: TextStyle(fontSize: 12)),
+      ]);
+}
+      </script>
+    </div>
+
+    <!-- A3 -->
+    <div class="card">
+      <div class="title">Assignment 3: Food Menu Item</div>
+      <div class="assignment-card">
+        <div class="food-card">
+          <div class="food-image">🍕</div>
+          <div class="food-info">
+            <div style="font-weight:700">Margherita Pizza</div>
+            <div style="color:var(--muted); margin:6px 0">Fresh tomatoes, mozzarella cheese, basil leaves on crispy thin crust</div>
+            <div style="color:#e11d48; font-weight:700">$12.99</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a3', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a3">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.network(
+                'https://as2.ftcdn.net/v2/jpg/15/71/65/03/1000_F_1571650391_G3PyjXcyeb88DQV3zLZsk9vmhhwmKYE8.jpg',
+                width: double.infinity, height: 120, fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Margherita Pizza', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Text('Fresh tomatoes, mozzarella cheese, basil leaves on crispy thin crust', style: TextStyle(color: Colors.grey)),
+                SizedBox(height: 10),
+                Text('\$12.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFff6b6b))),
+              ]),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A4 -->
+    <div class="card">
+      <div class="title">Assignment 4: Weather Display</div>
+      <div class="assignment-card">
+        <div class="weather-card">
+          <div style="font-size:48px">☀️</div>
+          <div style="font-size:42px; font-weight:800">24°</div>
+          <div>New York</div>
+          <div style="opacity:.9">Sunny</div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px">
+            <span>High: 28°</span><span>Low: 18°</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a4', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a4">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [Color(0xFF74b9ff), Color(0xFF0984e3)]),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: EdgeInsets.all(30),
+            child: Column(children: [
+              Text('☀️', style: TextStyle(fontSize: 60, color: Colors.amber)),
+              SizedBox(height: 15),
+              Text('24°', style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white)),
+              SizedBox(height: 10),
+              Text('New York', style: TextStyle(fontSize: 18, color: Colors.white)),
+              Text('Sunny', style: TextStyle(fontSize: 16, color: Colors.white70)),
+              SizedBox(height: 15),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text('High: 28°', style: TextStyle(color: Colors.white)),
+                Text('Low: 18°', style: TextStyle(color: Colors.white)),
+              ]),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A5 -->
+    <div class="card">
+      <div class="title">Assignment 5: Product Showcase</div>
+      <div class="assignment-card">
+        <div class="product-card">
+          <div class="product-image">👟</div>
+          <div class="product-info">
+            <div style="font-weight:700">Running Shoes Pro</div>
+            <div style="color:var(--muted)">Nike</div>
+            <div style="color:#059669; font-weight:800">RS. 70000</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a5', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a5">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Column(children: [
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.network(
+                'https://as1.ftcdn.net/v2/jpg/04/86/30/72/1000_F_486307203_jjC07zmJI5bCllBYHYJv0shkU1GsBDOC.jpg',
+                width: double.infinity, height: 140, fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Running Shoes Pro', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text('Nike', style: TextStyle(color: Colors.grey)),
+                SizedBox(height: 10),
+                Text('RS. 70000', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF00b894))),
+              ]),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A6 -->
+    <div class="card">
+      <div class="title">Assignment 6: News Article Preview</div>
+      <div class="assignment-card">
+        <div class="news-card">
+          <div class="news-image">📰</div>
+          <div class="news-content">
+            <div style="font-weight:700">Flutter 4.0 Released with Amazing Features</div>
+            <div style="color:var(--muted)">Google announces the latest version of Flutter with improved performance...</div>
+            <div style="font-size:12px;color:#9ca3af">TechNews • 2 hours ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a6', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a6">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Row(children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  'https://avatars.githubusercontent.com/u/14101776?s=200&v=4',
+                  width: 80, height: 80, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('Flutter 4.0 Released with Amazing Features', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 8),
+                  Text('Google announces the latest version of Flutter with improved performance...', style: TextStyle(color: Colors.grey)),
+                  SizedBox(height: 8),
+                  Text('TechNews • 2 hours ago', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                ]),
+              ),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A7 -->
+    <div class="card">
+      <div class="title">Assignment 7: Social Media Post</div>
+      <div class="assignment-card">
+        <div class="social-post">
+          <div class="post-header">
+            <div class="user-avatar">👨</div>
+            <div>
+              <div style="font-weight:700">Mike Chen</div>
+              <div style="font-size:12px; color:#9ca3af">2 hours ago</div>
+            </div>
+          </div>
+          <div style="margin:10px 0">Just finished building my first Flutter app! The widgets system is incredible 🚀</div>
+          <div class="post-image">📱</div>
+          <div style="color:var(--muted)">❤️ 5 likes • 💬 2 comments</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a7', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a7">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(children: [
+                ClipOval(
+                  child: Image.network(
+                    'https://as1.ftcdn.net/v2/jpg/01/97/11/64/1000_F_197116416_hpfTtXSoJMvMqU99n6hGP4xX0ejYa4M7.jpg',
+                    width: 45, height: 45, fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 12),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('Mike Chen', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text('2 hours ago', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                ]),
+              ]),
+              SizedBox(height: 15),
+              Text('Just finished building my first Flutter app! The widgets system is incredible 🚀'),
+              SizedBox(height: 15),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  'https://as2.ftcdn.net/v2/jpg/05/84/11/59/1000_F_584115952_BGpO65qpz5mjF0fTpJOFKEFRU7DUbEQ2.jpg',
+                  width: double.infinity, height: 120, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 15),
+              Text('❤️ 5 likes • 💬 2 comments', style: TextStyle(color: Colors.grey)),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A8 -->
+    <div class="card">
+      <div class="title">Assignment 8: Music Album Display</div>
+      <div class="assignment-card">
+        <div class="album-card">
+          <div class="album-cover">🎵</div>
+          <div style="font-weight:700">Night Vibes</div>
+          <div style="color:var(--muted)">The Midnight</div>
+          <div style="color:#9ca3af; font-size:14px">2025 • 8 tracks</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a8', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a8">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  'https://as1.ftcdn.net/v2/jpg/02/01/72/50/1000_F_201725039_VbNXfw4Q9ejNFfLBlYIeNMX6Q95kALBW.jpg',
+                  width: 150, height: 150, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 20),
+              Text('Night Vibes', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
+              Text('The Midnight', style: TextStyle(fontSize: 16, color: Colors.grey)),
+              SizedBox(height: 8),
+              Text('2025 • 8 tracks', style: TextStyle(fontSize: 14, color: Colors.grey)),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A9 -->
+    <div class="card">
+      <div class="title">Assignment 9: Contact Card</div>
+      <div class="assignment-card">
+        <div class="contact-card">
+          <div class="contact-photo">👨‍💼</div>
+          <div style="font-weight:800; font-size:18px">David Wilson</div>
+          <div class="contact-info">
+            <div class="contact-item"><span>📞</span><span>+1 (555) 123-4567</span></div>
+            <div class="contact-item"><span>📧</span><span>david.wilson@email.com</span></div>
+            <div class="contact-item"><span>📍</span><span>123 Main St, City, State</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a9', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a9">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(children: [
+              ClipOval(
+                child: Image.network(
+                  'https://as1.ftcdn.net/v2/jpg/04/97/66/28/1000_F_497662812_7rGW6PMBJR9AbrKcGgN5S1luXYTjH92i.jpg',
+                  width: 90, height: 90, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 15),
+              Text('David Wilson', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              SizedBox(height: 15),
+              _row('📞 ', '+1 (555) 123-4567'),
+              SizedBox(height: 10),
+              _row('📧 ', 'david.wilson@email.com'),
+              SizedBox(height: 10),
+              _row('📍 ', '123 Main St, City, State'),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _row(String icon, String text) => Row(children: [
+        Text(icon, style: TextStyle(fontSize: 16)),
+        Text(text),
+      ]);
+}
+      </script>
+    </div>
+
+    <!-- A10 -->
+    <div class="card">
+      <div class="title">Assignment 10: App About Page</div>
+      <div class="assignment-card">
+        <div class="about-card">
+          <div class="app-logo">📱</div>
+          <div style="font-weight:800; font-size:20px">MyFlutterApp</div>
+          <div style="color:#9ca3af">Version 1.0.0</div>
+          <div style="color:var(--muted); text-align:left; max-width:520px; margin:10px auto 0">
+            A beautiful mobile application built with Flutter. This app demonstrates clean UI design and smooth user experience.
+          </div>
+          <div style="text-align:left; max-width:520px; margin:14px auto 0; border-top:1px solid var(--border); padding-top:10px">
+            <div style="font-weight:700; margin-bottom:6px">Developer Information</div>
+            <div>🏢 ABC Tech Solutions</div>
+            <div>📧 support@abctech.com</div>
+            <div>🌐 www.abctech.com</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a10', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a10">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: AssignmentHome(), debugShowCheckedModeBanner: false));
+
+class AssignmentHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF667eea),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.all(30),
+            child: Column(children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  'https://as2.ftcdn.net/v2/jpg/06/47/25/89/1000_F_647258937_7kU3tVo7VAjNi40EtXZpDalhzxzNKANK.jpg',
+                  width: 80, height: 80, fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 20),
+              Text('MyFlutterApp', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text('Version 1.0.0', style: TextStyle(color: Colors.grey)),
+              SizedBox(height: 20),
+              Text(
+                'A beautiful mobile application built with Flutter. This app demonstrates clean UI design and smooth user experience.',
+                textAlign: TextAlign.center, style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 20),
+              Divider(),
+              SizedBox(height: 10),
+              Text('Developer Information', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              Text('🏢 ABC Tech Solutions'),
+              Text('📧 support@abctech.com'),
+              Text('🌐 www.abctech.com'),
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+      </script>
+    </div>
+
+    <!-- A11 -->
+    <div class="card">
+      <div class="title">Assignment 11: Simple Calculator</div>
+      <div class="assignment-card">
+        <!-- quick visual demo (pure HTML/CSS so you can see a mockup) -->
+        <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#dde3ea">
+          <div style="background:#f4f4f4; border-bottom:1px solid #cbd5e1; padding:18px; text-align:right">
+            <div style="font-size:12px; color:#64748b; min-height:16px">12 + 7 × 3</div>
+            <div style="font-size:28px; font-weight:700; color:#0f172a">33</div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; padding:10px">
+            <button class="copy-btn" style="padding:10px">AC</button>
+            <button class="copy-btn" style="padding:10px">CE</button>
+            <button class="copy-btn" style="padding:10px">%</button>
+            <button class="copy-btn" style="padding:10px">÷</button>
+
+            <button class="copy-btn" style="padding:10px">7</button>
+            <button class="copy-btn" style="padding:10px">8</button>
+            <button class="copy-btn" style="padding:10px">9</button>
+            <button class="copy-btn" style="padding:10px">×</button>
+
+            <button class="copy-btn" style="padding:10px">4</button>
+            <button class="copy-btn" style="padding:10px">5</button>
+            <button class="copy-btn" style="padding:10px">6</button>
+            <button class="copy-btn" style="padding:10px">−</button>
+
+            <button class="copy-btn" style="padding:10px">1</button>
+            <button class="copy-btn" style="padding:10px">2</button>
+            <button class="copy-btn" style="padding:10px">3</button>
+            <button class="copy-btn" style="padding:10px">+</button>
+
+            <button class="copy-btn" style="grid-column: span 2; padding:10px">0</button>
+            <button class="copy-btn" style="padding:10px">.</button>
+            <button class="copy-btn" style="padding:10px">=</button>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a11', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a11">
+        import 'package:flutter/material.dart';
+
+void main() => runApp(const CalculatorApp());
+
+class CalculatorApp extends StatelessWidget {
+  const CalculatorApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Simple Calculator',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: Colors.grey.shade700,
+          secondary: Colors.lightBlue.shade200,
+        ),
+      ),
+      home: const CalculatorScreen(),
+    );
+  }
+}
+
+class CalculatorScreen extends StatefulWidget {
+  const CalculatorScreen({super.key});
+
+  @override
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
+}
+
+class _CalculatorScreenState extends State<CalculatorScreen> {
+  String _display = '0';
+  String _expression = '';
+  bool _shouldResetDisplay = false;
+
+  void _onButtonPressed(String buttonText) {
+    setState(() {
+      switch (buttonText) {
+        case 'AC':
+          _display = '0';
+          _expression = '';
+          _shouldResetDisplay = false;
+          break;
+        case 'CE':
+          _display = '0';
+          _shouldResetDisplay = false;
+          break;
+        case '=':
+          _calculateResult();
+          break;
+        case '÷':
+        case '×':
+        case '−':
+        case '+':
+        case '%':
+          _handleOperator(buttonText);
+          break;
+        case '.':
+          _handleDecimal();
+          break;
+        default:
+          _handleNumber(buttonText);
+      }
+    });
+  }
+
+  void _handleNumber(String number) {
+    if (_shouldResetDisplay) {
+      _display = number;
+      _shouldResetDisplay = false;
+    } else {
+      if (_display == '0') {
+        _display = number;
+      } else {
+        _display += number;
+      }
+    }
+  }
+
+  void _handleOperator(String operator) {
+    if (_display != '0' || !_shouldResetDisplay) {
+      _expression += _display;
+    }
+    _expression += _getOperatorSymbol(operator);
+    _shouldResetDisplay = true;
+  }
+
+  void _handleDecimal() {
+    if (!_display.contains('.')) {
+      _display += '.';
+    }
+  }
+
+  String _getOperatorSymbol(String displayOperator) {
+    switch (displayOperator) {
+      case '÷':
+        return '/';
+      case '×':
+        return '*';
+      case '−':
+        return '-';
+      case '+':
+        return '+';
+      case '%':
+        return '%';
+      default:
+        return displayOperator;
+    }
+  }
+
+  void _calculateResult() {
+    try {
+      _expression += _display;
+      final result = _evaluateExpression(_expression);
+      _display = _formatResult(result);
+      _expression = '';
+      _shouldResetDisplay = true;
+    } catch (e) {
+      _display = 'Error';
+      _expression = '';
+      _shouldResetDisplay = true;
+    }
+  }
+
+  double _evaluateExpression(String expression) {
+    expression = expression.replaceAll('%', '/100');
+    return _simpleEvaluate(expression);
+  }
+
+  double _simpleEvaluate(String expression) {
+    expression = expression.replaceAll(' ', '');
+    if (expression.contains('*') || expression.contains('/')) {
+      return _evaluateWithMultiplication(expression);
+    } else {
+      return _evaluateWithAddition(expression);
+    }
+  }
+
+  double _evaluateWithMultiplication(String expression) {
+    List<String> parts = [];
+    List<String> operators = [];
+
+    String current = '';
+    for (int i = 0; i < expression.length; i++) {
+      String char = expression[i];
+      if (char == '+' || char == '-') {
+        if (current.isNotEmpty) {
+          parts.add(current);
+          current = '';
+        }
+        operators.add(char);
+      } else {
+        current += char;
+      }
+    }
+    if (current.isNotEmpty) parts.add(current);
+
+    List<double> results = [];
+    for (String part in parts) {
+      results.add(_evaluateMultiplicationOnly(part));
+    }
+
+    double result = results[0];
+    for (int i = 0; i < operators.length && i + 1 < results.length; i++) {
+      if (operators[i] == '+') {
+        result += results[i + 1];
+      } else {
+        result -= results[i + 1];
+      }
+    }
+    return result;
+  }
+
+  double _evaluateMultiplicationOnly(String expression) {
+    List<String> parts = [];
+    List<String> operators = [];
+
+    String current = '';
+    for (int i = 0; i < expression.length; i++) {
+      String char = expression[i];
+      if (char == '*' || char == '/') {
+        if (current.isNotEmpty) {
+          parts.add(current);
+          current = '';
+        }
+        operators.add(char);
+      } else {
+        current += char;
+      }
+    }
+    if (current.isNotEmpty) parts.add(current);
+    if (parts.isEmpty) return 0;
+
+    double result = double.parse(parts[0]);
+    for (int i = 0; i < operators.length && i + 1 < parts.length; i++) {
+      double next = double.parse(parts[i + 1]);
+      if (operators[i] == '*') {
+        result *= next;
+      } else if (operators[i] == '/') {
+        if (next == 0) throw Exception('Division by zero');
+        result /= next;
+      }
+    }
+    return result;
+  }
+
+  double _evaluateWithAddition(String expression) {
+    List<String> parts = [];
+    List<String> operators = [];
+
+    String current = '';
+    for (int i = 0; i < expression.length; i++) {
+      String char = expression[i];
+      if (char == '+' || char == '-') {
+        if (current.isNotEmpty) {
+          parts.add(current);
+          current = '';
+        }
+        operators.add(char);
+      } else {
+        current += char;
+      }
+    }
+    if (current.isNotEmpty) parts.add(current);
+    if (parts.isEmpty) return 0;
+
+    double result = double.parse(parts[0]);
+    for (int i = 0; i < operators.length && i + 1 < parts.length; i++) {
+      double next = double.parse(parts[i + 1]);
+      if (operators[i] == '+') {
+        result += next;
+      } else {
+        result -= next;
+      }
+    }
+    return result;
+  }
+
+  String _formatResult(double result) {
+    if (result == result.toInt()) {
+      return result.toInt().toString();
+    } else {
+      String formatted = result.toStringAsFixed(6);
+      while (formatted.endsWith('0')) {
+        formatted = formatted.substring(0, formatted.length - 1);
+      }
+      if (formatted.endsWith('.')) {
+        formatted = formatted.substring(0, formatted.length - 1);
+      }
+      return formatted;
+    }
+  }
+
+  void _onBackspace() {
+    setState(() {
+      if (_display.length > 1) {
+        _display = _display.substring(0, _display.length - 1);
+      } else {
+        _display = '0';
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFDDE3EA), // dull gray-blue
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              // Display Area
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF4F4F4),
+                  border: Border.all(color: Colors.grey.shade400, width: 1),
+                ),
+                height: 160,
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _expression,
+                      style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _display,
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Buttons
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildRow(['AC', 'CE', '%', '÷'], Colors.teal.shade200),
+                    buildRow(['7', '8', '9', '×'], Colors.blue.shade100),
+                    buildRow(['4', '5', '6', '−'], Colors.amber.shade100),
+                    buildRow(['1', '2', '3', '+'], Colors.orange.shade100),
+                    buildRow(['0', '.', '<', '='], Colors.green.shade100),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildRow(List<String> texts, Color color) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: texts.map((text) {
+        if (text == '<') {
+          return BasicButton(text: '⌫', color: color, onTap: _onBackspace);
+        }
+        return BasicButton(
+          text: text,
+          color: color,
+          onTap: () => _onButtonPressed(text),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class BasicButton extends StatelessWidget {
+  final String text;
+  final Color color;
+  final VoidCallback? onTap;
+
+  const BasicButton({
+    super.key,
+    required this.text,
+    required this.color,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 70,
+        height: 60,
+        margin: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey.shade400),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    );
+  }
+}
+  </script>
+    </div>
+
+    <!-- A12 -->
+    <div class="card">
+      <div class="title">Assignment 12: Greeting Card (2 Screens)</div>
+      <div class="assignment-card">
+        <!-- quick visual mockup -->
+        <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden">
+          <div style="background:#7c3aed; color:#fff; padding:10px 14px; font-weight:700">Greeting Card</div>
+          <div style="padding:14px; background:#faf5ff">
+            <div style="font-size:14px; color:#6b21a8; margin-bottom:8px">Enter your name:</div>
+            <div style="border:1px solid #e9d5ff; height:36px; border-radius:6px; background:#fff"></div>
+            <div style="height:40px; margin-top:10px; background:#7c3aed; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px">See Your Gift</div>
+          </div>
+          <div style="background:#7c3aed; color:#fff; padding:8px 14px; font-weight:700">Your Gift</div>
+          <div style="padding:14px; background:#ede9fe">
+            <div style="font-size:40px; line-height:1">🎂</div>
+            <div style="margin:6px 0 10px; font-weight:700; color:#5b21b6">Happy Birthday &lt;name&gt;!</div>
+            <div style="height:36px; width:100px; background:#a78bfa; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:6px">Back</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="copy-btn" onclick="copyCode('code-a12', this)">Copy Dart</button>
+      </div>
+      <script type="text/plain" id="code-a12">
+        import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+void main() => runApp(const GreetingApp());
+
+class GreetingApp extends StatelessWidget {
+  const GreetingApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Greeting Card',
+      debugShowCheckedModeBanner: false,
+      home: const FirstScreen(),
+      theme: ThemeData(
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.purple.shade50,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class FirstScreen extends StatefulWidget {
+  const FirstScreen({super.key});
+
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  final _nameController = TextEditingController();
+
+  void _goToNext() {
+    final name = _nameController.text.trim();
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please enter your name')));
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => SecondScreen(name: name)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Greeting Card')),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              'Enter your name:',
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.purple.shade900,
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.purple.shade200),
+                ),
+                hintText: 'Your name here',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.purple.shade400),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            Container(
+              height: 45,
+              color: Colors.purple,
+              child: TextButton(
+                onPressed: _goToNext,
+                child: const Text(
+                  'See Your Gift',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  final String name;
+  const SecondScreen({super.key, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Your Gift')),
+      body: Container(
+        width: double.infinity,
+        color: Colors.purple.shade100,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.cake_rounded, size: 80, color: Colors.purple),
+            const SizedBox(height: 10),
+            Text(
+              'Happy Birthday $name!',
+              style: GoogleFonts.poppins(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                color: Colors.purple.shade800,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: 40,
+              width: 120,
+              color: Colors.purple.shade400,
+              child: TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Back',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+  </script>
+    </div>
+
+
+  </div>
+
+  <script>
+    async function copyCode(codeId, btn) {
+      const el = document.getElementById(codeId);
+      const text = el ? el.textContent : '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const original = btn.textContent;
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = original;
+        }, 1200);
+      } catch (e) {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const original = btn.textContent;
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = original;
+        }, 1200);
+      }
+    }
+  </script>
+</body>
+
+</html>
